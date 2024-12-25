@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      overflow: auto;
+      color: #31b927;
+    }
+    found{
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 4px;
+      color: #376703;
+    }
+    no{
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 4px;
+      color: orange;
+    }
+  </style>
+</head>
+<body>
+<h1>Worker API Documentation</h1>
+<h2>
+  <div class="link">
+    <a href="indexDescription.html">Go to Additional Documentation</a>
+  </div>
+</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>CRUD Operation</th>
+    <th>Endpoint</th>
+    <th>Request Body / Path Parameters</th>
+    <th>Description / Response</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>GET</td>
+    <td>/worker/{id}</td>
+    <td>
+      <strong>Path Parameter:</strong>
+      <ul>
+        <li><code>id</code>: Integer - Идентификатор работника, которого нужно получить</li>
+      </ul>
+    </td>
+    <td>
+      Получить конкретного работника по его идентификатору ID.<br>
+      <strong>Responses:</strong>
+      <ul>
+        <li><found>200 OK</found> - Работник найден.</li>
+        <li><no>404 Not Found</no> - Если такого работника нет.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td>/worker</td>
+    <td>None</td>
+    <td>
+      Получить список до 5 последних работников.<br>
+      <strong>Responses:</strong>
+      <ul>
+        <li><found>200 OK</found> - Список объектов Worker (до 5).</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/worker/new</td>
+    <td>
+      <strong>Request Body:</strong>
+      <pre>{
+    "name": "string (max 50, not blank)",
+    "surName": "string (max 50, not blank)",
+    "dateOfBirth": "yyyy-MM-dd (past)",
+    "address": "string (not blank)"
+}</pre>
+    </td>
+    <td>
+      Создать нового работника.<br>
+      <strong>Responses:</strong>
+      <ul>
+        <li><found>201 Created</found> - Создан объект Worker.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td>/worker/update/{id}</td>
+    <td>
+      <strong>Path Parameter:</strong>
+      <ul>
+        <li><code>id</code>: (Integer) - Идентификатор работника для обновления.</li>
+      </ul>
+      <strong>Request Body:</strong>
+      <pre>{
+    "name": "string (max 50, not blank)",
+    "surName": "string (max 50, not blank)",
+    "dateOfBirth": "yyyy-MM-dd (past)",
+    "address": "string (not blank)"
+}</pre>
+    </td>
+    <td>
+      Обновить существующего работника по идентификатору ID.<br>
+      <strong>Responses:</strong>
+      <ul>
+        <li><found>201 Created</found> - Обновлен объект Worker</li>
+        <li><no>404 Not Found</no> - Если такого работника нет</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>/worker/delete/{id}</td>
+    <td>
+      <strong>Path Parameter:</strong>
+      <ul>
+        <li><code>id</code>: Integer - Идентификатор работника, которого нужно удалить</li>
+      </ul>
+    </td>
+    <td>
+      Удаление работника по идентификатору ID.<br>
+      <strong>Responses:</strong>
+      <ul>
+        <li><found>200 OK</found> - Если работник был успешно удален</li>
+        <li><no>404 Not Found</no> - Если такого работника нет</li>
+      </ul>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

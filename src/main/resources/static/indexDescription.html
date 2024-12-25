@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+            color: #31b927;
+        }
+        found{
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #376703;
+        }
+        no{
+            background: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+<h1>Worker API Documentation</h1>
+
+<h2>1. Получить работника по ID</h2>
+<p><strong>Endpoint:</strong> <code>GET /worker/{id}</code></p>
+<p><strong>Описание:</strong> Получить конкретного работника по его идентификатору.</p>
+<p><strong>Path Parameter:</strong></p>
+<ul>
+    <li><code>id</code> (Integer) - Идентификатор работника, которого нужно получить.</li>
+</ul>
+<p><strong>Responses:</strong></p>
+<ul>
+    <li><found>200 OK</found> - Работник найден.</li>
+    <pre>{
+    "id": 1
+    "name": "string",
+    "surName": "string",
+    "dateOfBirth": "yyyy-MM-dd",
+    "address": "string",
+    "create": "yyyy-MM-dd HH:mm:ss",
+    "update": "yyyy-MM-dd HH:mm:ss"
+}</pre>
+    <li><no>404 Not Found</no> - Если работника нет.</li>
+</ul>
+
+<h2>2. Получить всех рабочих (Limit 5)</h2>
+<p><strong>Endpoint:</strong> <code>GET /worker</code></p>
+<p><strong>Описание:</strong> Получить список до 5 последних работников.</p>
+<p><strong>Responses:</strong></p>
+<ul>
+    <li><found>200 OK</found> - Список объектов Worker (до 5).</li>
+    <pre>{
+    "id": 0
+    "name": "string",
+    "surName": "string",
+    "dateOfBirth": "yyyy-MM-dd",
+    "address": "string",
+    "create": "yyyy-MM-dd HH:mm:ss",
+    "update": "yyyy-MM-dd HH:mm:ss"
+},
+        {
+    "id": 1
+    "name": "string",
+    "surName": "string",
+    "dateOfBirth": "yyyy-MM-dd",
+    "address": "string",
+    "create": "yyyy-MM-dd HH:mm:ss",
+    "update": "yyyy-MM-dd HH:mm:ss"
+}
+    </pre>
+
+</ul>
+
+<h2>3. Создать нового работника</h2>
+<p><strong>Endpoint:</strong> <code>POST /worker/new</code></p>
+<p><strong>Описание:</strong> Создать нового работника.</p>
+<p><strong>Request Body:</strong> Объект JSON со следующими полями:</p>
+<pre>{
+    "name": "string (max 50 characters, not blank)",
+    "surName": "string (max 50 characters, not blank)",
+    "dateOfBirth": "yyyy-MM-dd (must be in the past)",
+    "address": "string (not blank)"
+}</pre>
+<p><strong>Responses:</strong></p>
+<ul>
+    <li><found>201 Created</found> - Создан объект Worker.</li>
+    <pre>  {
+    "id": 2
+    "name": "string",
+    "surName": "string",
+    "dateOfBirth": "yyyy-MM-dd",
+    "address": "string",
+    "create": "yyyy-MM-dd HH:mm:ss",
+    "update": "yyyy-MM-dd HH:mm:ss"
+    }</pre>
+</ul>
+
+<h2>4. Обновить существующего работника</h2>
+<p><strong>Endpoint:</strong> <code>PUT /worker/update/{id}</code></p>
+<p><strong>Описание:</strong> Обновить существующего работника по идентификатору.</p>
+<p><strong>Path Parameter:</strong></p>
+<ul>
+    <li><code>id</code> (Integer) - Идентификатор работника для обновления.</li>
+</ul>
+<p><strong>Request Body:</strong> JSON-объект с той же структурой, что и <strong>Создать нового работника</strong> endpoint.</p>
+<p><strong>Responses:</strong></p>
+<ul>
+    <li><found>201 Created</found> - Обновлен объект Worker.</li>
+    <pre>  {
+    "id": 2
+    "name": "string",
+    "surName": "string",
+    "dateOfBirth": "yyyy-MM-dd",
+    "address": "string",
+    "create": "yyyy-MM-dd HH:mm:ss",
+    "update": "yyyy-MM-dd HH:mm:ss"
+    }</pre>
+    <li><no>404 Not Found</no> - Если работника нет.</li>
+</ul>
+
+<h2>5. Удалить работника</h2>
+<p><strong>Endpoint:</strong> <code>DELETE /worker/delete/{id}</code></p>
+<p><strong>Описание:</strong> Удаление работника по идентификатору.</p>
+<p><strong>Path Parameter:</strong></p>
+<ul>
+    <li><code>id</code> (Integer) - Идентификатор работника, которого нужно удалить.</li>
+</ul>
+<p><strong>Responses:</strong></p>
+<ul>
+    <li><found>200 OK</found> - Если работник был успешно удален.</li>
+    <li><no>404 Not Found</no> - Если работника нет.</li>
+</ul>
+<h4>Замечания и предложения писать на:</p>
+    smith80java@gmail.com</h4>
+
+</body>
+</html>
