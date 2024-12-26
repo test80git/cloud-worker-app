@@ -22,20 +22,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class HelloCloudService {
     private final AtomicInteger count = new AtomicInteger(0);
-    private static final LocalDateTime CREATEDATETIME = LocalDateTime.of(2024,12,25, 12,00,00);
+    private static final LocalDateTime CREATEDATETIME = LocalDateTime.of(2024, 12, 25, 12, 00, 00);
     private final Map<Integer, Worker> map = new HashMap<>(20);
 
     public HelloCloudService() {
-    map.put(count.incrementAndGet(), new Worker(count.get(), "Tom", "Cruise", LocalDate.of(1962,07,03), "USA",
-            CREATEDATETIME, CREATEDATETIME));
-    map.put(count.incrementAndGet(), new Worker(count.get(), "Katie", "Holmes", LocalDate.of(1978,12,18), "USA", CREATEDATETIME,
-            CREATEDATETIME));
-    map.put(count.incrementAndGet(), new Worker(count.get(), "Константин", "Хабенский", LocalDate.of(1972,01,11), "Ленинград",
-            CREATEDATETIME,
-            CREATEDATETIME));
-    map.put(count.incrementAndGet(), new Worker(count.get(), "Сергей", "Безруков", LocalDate.of(1973,10,18), "Москва", CREATEDATETIME
-            , CREATEDATETIME));
-}
+        map.put(count.incrementAndGet(), new Worker(count.get(), "Tom", "Cruise", LocalDate.of(1962, 07, 03), "USA",
+                CREATEDATETIME, CREATEDATETIME));
+        map.put(count.incrementAndGet(), new Worker(count.get(), "Katie", "Holmes", LocalDate.of(1978, 12, 18), "USA", CREATEDATETIME,
+                CREATEDATETIME));
+        map.put(count.incrementAndGet(), new Worker(count.get(), "Константин", "Хабенский", LocalDate.of(1972, 01, 11), "Ленинград",
+                CREATEDATETIME,
+                CREATEDATETIME));
+        map.put(count.incrementAndGet(), new Worker(count.get(), "Сергей", "Безруков", LocalDate.of(1973, 10, 18), "Москва", CREATEDATETIME
+                , CREATEDATETIME));
+    }
+
     public Worker getWorker(Integer id) {
 
         if (!map.containsKey(id))
@@ -54,9 +55,10 @@ public class HelloCloudService {
 
         log.info("size map = {}", size);
         if (size > 100) {
-            log.info("size map>100 = {}", size);
-            for (int i = 0; i < size / 2; i++) {
-                map.remove(i);
+            int temp = count.get();
+            log.info("size map>100 = {}, count = {}", size, count);
+            for (int i = 0; i < 50; i++) {
+                map.remove(temp - 50 + i);
             }
         }
         Worker worker = new Worker();
