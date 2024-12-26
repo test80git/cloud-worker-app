@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Worker</title>
+</head>
+<body>
+<h1>Create Worker</h1>
+<form id="workerForm">
+  <label for="name">First Name:</label>
+  <input type="text" id="name" name="name" required>
+  <br><br>
+  <label for="surName">Last Name:</label>
+  <input type="text" id="surName" name="surName" required>
+  <br><br>
+  <label for="dateOfBirth">Date of Birth:</label>
+  <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+  <br><br>
+  <label for="address">Address:</label>
+  <input type="text" id="address" name="address" required>
+  <br><br>
+  <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<p id="responseMessage"></p>
+
+<script>
+  async function submitForm() {
+    const form = document.getElementById('workerForm');
+    const formData = new FormData(form);
+
+    // Create JSON object from form data
+    const workerRequest = {
+      name: formData.get('name'),
+      surName: formData.get('surName'),
+      dateOfBirth: formData.get('dateOfBirth'),
+      address: formData.get('address')
+    };
+
+    try {
+      const response = await fetch('/worker/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(workerRequest)
+      });
+
+      if (response.ok) {
+        const worker = await response.json();
+        document.getElementById('responseMessage').innerText =
+                `Worker created successfully! ID: ${worker.id}, Name: ${worker.name} ${worker.surName}`;
+      } else {
+        document.getElementById('responseMessage').innerText =
+                `Error: ${response.status} ${response.statusText}`;
+      }
+    } catch (error) {
+      document.getElementById('responseMessage').innerText = `Error: ${error.message}`;
+    }
+  }
+</script>
+</body>
+</html>
