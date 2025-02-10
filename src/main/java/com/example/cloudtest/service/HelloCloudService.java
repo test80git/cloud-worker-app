@@ -15,15 +15,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-@SessionScope // Указывает, что экземпляр сервиса создается для каждой HTTP-сессии
+//@SessionScope // Указывает, что экземпляр сервиса создается для каждой HTTP-сессии
 @Slf4j
 public class HelloCloudService {
     private final AtomicInteger count = new AtomicInteger(0);
     private static final LocalDateTime CREATEDATETIME = LocalDateTime.of(2024, 12, 25, 12, 00, 00);
-    private final Map<Integer, Worker> map = new HashMap<>(20);
+    private final Map<Integer, Worker> map = new ConcurrentHashMap<>(20);
 
     public HelloCloudService() {
         map.put(count.incrementAndGet(), new Worker(count.get(), "Tom", "Cruise", LocalDate.of(1962, 07, 03), "USA",
@@ -57,9 +58,10 @@ public class HelloCloudService {
         if (size > 100) {
             int temp = count.get();
             log.info("size map>100 = {}, count = {}", size, count);
-            for (int i = 0; i < 50; i++) {
-                map.remove(temp - 50 + i);
+            for (int i = 0; i < 96; i++) {
+                map.remove(temp - 96 + i);
             }
+            log.info("map = {}", map);
         }
         Worker worker = new Worker();
 
