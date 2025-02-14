@@ -59,7 +59,7 @@ public class HelloCloudController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteWorker(@PathVariable Integer id) {
-        log.info("deleteWorker() begin");
+        log.info("begin deleteWorker() c id = {}",id);
 
         return service.deleteWorker(id);
     }
